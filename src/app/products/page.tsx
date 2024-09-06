@@ -9,10 +9,12 @@ import { productSchema, vendorSchema, vulnSchema } from "@/types/table";
 import { supabase } from "@/config/supabaseClient";
 
 export const metadata: Metadata = {
-  title: "Vendors",
+  title: "Productss",
   description:
-    "A table consisting of all the vendors in database. Vendor Name, their Advisory Link, and total Vulnerabilites are the columns.",
+    "A table consisting of all the products in database. Products, their Vendor Name, and total Vulnerabilites are the columns.",
 };
+
+export const revalidate = 3600;
 
 export default async function TaskPage() {
   const { data: prouductData, error } = await supabase.rpc(

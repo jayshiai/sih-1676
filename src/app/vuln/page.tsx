@@ -14,6 +14,7 @@ export const metadata: Metadata = {
     "A table consisting of vulnerabilities in database. CVE, Title, Vendor, Severity, Base Score, Publication Date are the columns.",
 };
 
+export const revalidate = 3600;
 export default async function TaskPage() {
   const { data: vulnerabilities, error } = await supabase
     .from("vulnerabilities")

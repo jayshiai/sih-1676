@@ -14,6 +14,8 @@ export const metadata: Metadata = {
     "A table consisting of all the vendors in database. Vendor Name, their Advisory Link, and total Vulnerabilites are the columns.",
 };
 
+export const revalidate = 3600;
+
 export default async function TaskPage() {
   const { data: vendorData, error } = await supabase.rpc(
     "get_advisories_per_vendor"
@@ -39,28 +41,12 @@ export default async function TaskPage() {
   const validVendors = z.array(vendorSchema).parse(transformedVendors);
   return (
     <>
-      <div className="md:hidden">
-        <Image
-          src="/examples/tasks-light.png"
-          width={1280}
-          height={998}
-          alt="Playground"
-          className="block dark:hidden"
-        />
-        <Image
-          src="/examples/tasks-dark.png"
-          width={1280}
-          height={998}
-          alt="Playground"
-          className="hidden dark:block"
-        />
-      </div>
-      <div className="hidden h-full flex-1 flex-col space-y-8 p-8 md:flex">
+      <div className=" h-full flex-1 flex-col space-y-8 p-8 flex">
         <div className="flex items-center justify-between space-y-2">
           <div>
             <h2 className="text-2xl font-bold tracking-tight">Vendors</h2>
             <p className="text-muted-foreground">
-              Here&apos;s a list of all the Vendorss in our database, along with
+              Here&apos;s a list of all the Vendors in our database, along with
               their Total Vulnerabilities and Source.
             </p>
           </div>

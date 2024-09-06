@@ -33,6 +33,10 @@ export const vendors = [
     value: "Cisco",
     label: "Cisco",
   },
+  {
+    value: "Red Hat",
+    label: "Red Hat",
+  },
 ];
 export const severities = [
   {
