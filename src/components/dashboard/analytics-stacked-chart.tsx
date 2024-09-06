@@ -47,12 +47,9 @@ const getMonthName = (dateString: string) => {
   const monthIndex = new Date(dateString).getMonth();
   return monthNames[monthIndex];
 };
-export function AnalyticsStackedChart({ data }: any) {
+export function AnalyticsStackedChart({ data, className }: any) {
   return (
-    <ChartContainer
-      config={chartConfig}
-      className="aspect-auto w-full h-[400px]"
-    >
+    <ChartContainer config={chartConfig} className={className}>
       <AreaChart
         accessibilityLayer
         data={data}

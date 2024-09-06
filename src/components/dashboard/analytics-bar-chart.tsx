@@ -34,7 +34,7 @@ const chartConfig = {
 // Define the custom order
 const severityOrder = ["CRITICAL", "HIGH", "MEDIUM", null];
 
-const AnalyticsBarChart = ({ data }: any) => {
+const AnalyticsBarChart = ({ data, className }: any) => {
   // Function to get the fill color based on severity
   const getFillColor = (severity: string) => {
     const config = chartConfig[severity as keyof typeof chartConfig];
@@ -57,7 +57,7 @@ const AnalyticsBarChart = ({ data }: any) => {
   });
 
   return (
-    <ChartContainer config={chartConfig} className="">
+    <ChartContainer config={chartConfig} className={className}>
       <BarChart
         accessibilityLayer
         data={sortedData}

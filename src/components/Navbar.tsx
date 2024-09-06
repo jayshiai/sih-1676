@@ -1,8 +1,7 @@
 import Link from "next/link";
 import React from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
-import { ModeToggle } from "./mode-toggle";
+
 import { UserNav } from "./user-nav";
 const Navbar = () => {
   return (
@@ -14,11 +13,10 @@ const Navbar = () => {
         <Link href="/products">Products</Link>
       </section>
       <section className="flex gap-4">
-        <ModeToggle />
         <Input
           type="text"
           placeholder="Search for Vulnerabulity"
-          className="w-64 h-8 hover:bg-accent hover:text-accent-foreground text-muted-foreground bg-muted/50"
+          className="sm:w-30 md:w-64 h-8 hover:bg-accent hover:text-accent-foreground text-muted-foreground bg-muted/50"
         />
         <div className="flex items-center space-x-2">
           <UserNav link={"https://github.com/shadcn.png"} />

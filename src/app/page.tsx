@@ -28,6 +28,7 @@ import AnalyticsBarChart from "@/components/dashboard/analytics-bar-chart";
 import { AnalyticsStackedChart } from "@/components/dashboard/analytics-stacked-chart";
 
 import NotificationPage from "@/components/notifications/notification-wrapper";
+import { AnalyticsInteractiveBarChart } from "@/components/dashboard/analytics-interactive-bar-chart";
 
 export default async function Home() {
   // Fetching data directly in the component
@@ -103,6 +104,8 @@ export default async function Home() {
     console.error("VENDOR AGGREGATION ERROR: ", vendorError);
   }
 
+  // console.log(severityMonthData);
+
   const lastEntry = monthData[monthData.length - 2];
   const secondLastEntry = monthData[monthData.length - 3];
 
@@ -129,7 +132,7 @@ export default async function Home() {
 
             <TabsTrigger value="notifications">Notifications</TabsTrigger>
           </TabsList>
-          <TabsContent value="overview" className="space-y-4">
+          <TabsContent value="overview" className="space-y-4  items-center">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -162,7 +165,7 @@ export default async function Home() {
               </Card>
             </div>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-              <Card className="col-span-3">
+              <Card className="col-span-4 md:col-span-3">
                 <CardHeader>
                   <CardTitle>Overview</CardTitle>
                 </CardHeader>
@@ -214,37 +217,7 @@ export default async function Home() {
           </TabsContent>
 
           <TabsContent value="analytics" className="space-y-4">
-            <div className="grid grid-cols-7 grid-rows-2 gap-6">
-              <div className="col-span-2 row-span-2 flex flex-col gap-6">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Vendor's Share</CardTitle>
-                    <CardDescription>
-                      Represents vulnerabilities contributed by each vendor.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="flex-1 pb-0">
-                    <AnalyticsPieChart data={vendorData} />
-                  </CardContent>
-                  <CardFooter className="flex-col gap-2 text-sm">
-                    <div className="leading-none text-muted-foreground">
-                      Distribution of vulnerabilities by vendor
-                    </div>
-                  </CardFooter>
-                </Card>
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Severity</CardTitle>
-                    <CardDescription>
-                      Count of vulnerabilities based on severity.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="flex-1 pb-0">
-                    <AnalyticsBarChart data={severityData} />
-                  </CardContent>
-                </Card>
-              </div>
-
+            <div className="grid md:grid-cols-7 grid-rows-2 gap-6">
               <Card className="col-span-5 row-span-1">
                 <CardHeader>
                   <CardTitle>Monthly Severity</CardTitle>
@@ -253,9 +226,50 @@ export default async function Home() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="flex-1 pb-0 min-h-[100px]">
-                  <AnalyticsStackedChart data={severityMonthData} />
+                  <AnalyticsStackedChart
+                    data={severityMonthData}
+                    className="aspect-auto w-full h-[300px]"
+                  />
                 </CardContent>
               </Card>
+              <Card className="col-span-2 row-span-1 flex flex-col justify-between">
+                <CardHeader>
+                  <CardTitle>Vendor's Share</CardTitle>
+                  <CardDescription>
+                    Represents vulnerabilities contributed by each vendor.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="pb-0 ">
+                  <AnalyticsPieChart data={vendorData} />
+                </CardContent>
+                <CardFooter className="flex-col gap-2 text-sm">
+                  <div className="leading-none text-muted-foreground">
+                    Distribution of vulnerabilities by vendor
+                  </div>
+                </CardFooter>
+              </Card>
+
+              <Card className="col-span-2 row-span-1 flex flex-col justify-between">
+                <CardHeader>
+                  <CardTitle>Severity</CardTitle>
+                  <CardDescription>
+                    Count of vulnerabilities based on severity.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="pb-0">
+                  <AnalyticsBarChart data={severityData} />
+                </CardContent>
+                <CardFooter className="flex-col gap-2 text-sm">
+                  <div className="leading-none text-muted-foreground">
+                    Distribution of vulnerabilities
+                  </div>
+                </CardFooter>
+              </Card>
+
+              <AnalyticsInteractiveBarChart
+                chartData={severityMonthData}
+                className="aspect-auto w-full h-[300px]"
+              />
             </div>
           </TabsContent>
 
