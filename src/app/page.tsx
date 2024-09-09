@@ -30,6 +30,7 @@ import { AnalyticsStackedChart } from "@/components/dashboard/analytics-stacked-
 import NotificationPage from "@/components/notifications/notification-wrapper";
 import { AnalyticsInteractiveBarChart } from "@/components/dashboard/analytics-interactive-bar-chart";
 
+export const revalidate = 3600;
 export default async function Home() {
   // Fetching data directly in the component
   const { data: vulnerabilities, error } = await supabase
